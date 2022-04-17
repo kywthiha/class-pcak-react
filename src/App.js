@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+
+
+import {
+  Routes,
+  Route,
+  useSearchParams,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import Page404 from "./pages/404";
+import PackList from "./pages/PackList";
+import ProtectedRoute from "./protected.route";
+import { getToken } from "./helper";
+import { useEffect, useState } from "react";
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='h-full'>
+      <Routes>
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/" element={<PackList />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Page404 />} />
+        <Route path="404" element={<Page404 />} />
+      </Routes>
     </div>
   );
 }
