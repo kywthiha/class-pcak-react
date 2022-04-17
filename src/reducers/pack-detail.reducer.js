@@ -1,4 +1,4 @@
-import { APPLY_PROMO_CODE, FETCH_PACK_DETAIL } from "../constants/actionTypes";
+import { APPLY_PROMO_CODE, FETCH_PACK_DETAIL, RESET_FETCH_PACK_DETAIL } from "../constants/actionTypes";
 
 
 const initialState = {
@@ -22,6 +22,11 @@ export default function PackDetailReducer(state = initialState, action) {
         promo_code: action.payload.promo_code,
         inProgressApplyPromoCode: action.payload.inProgress || false,
         errorsApplyPromoCode: action.payload.errors || null
+      };
+    case RESET_FETCH_PACK_DETAIL:
+      return {
+        inProgress: false,
+        pack: {},
       };
     default:
       return state;

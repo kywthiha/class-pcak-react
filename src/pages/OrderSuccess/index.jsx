@@ -34,7 +34,11 @@ export default function OrderSuccess() {
                                             <div className="line-clamp-1 max-w-md">{pack.newbie_note}</div>
                                         </div>
                                     </div>
-                                    <div className="text-lg font-bold">{formatPrice(pack.pack_price)}</div>
+                                    <div>
+                                        {pack.pack_type === 'unlimited' ? (<> <span className="font-bold text-lg">{formatPrice(order.grand_total)}</span><br></br><span className="text-gray-300">per month</span></>) : (pack.pack_price > pack.estimate_price ? <div className="mt-4 text-center  leading-none">
+                                            <span className="font-bold text-lg">{formatPrice(order.grand_total)}</span>
+                                        </div> : null)}
+                                    </div>
                                 </div>))
                             }
 
