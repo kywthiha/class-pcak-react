@@ -7,6 +7,7 @@ import { login } from "../../actions/auth.action";
 import { getPackList } from "../../actions/pack-list.action";
 import PackItem from "./PackItem";
 import 'nprogress/nprogress.css'
+import Layout from "../../components/Layout";
 
 export default function PackList() {
     const navigate = useNavigate();
@@ -21,14 +22,16 @@ export default function PackList() {
     }, [searchParams, dispatch]);
 
     return (
-        <div className="flex justify-center">
-            <div className="grid w-full lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 p-3 max-w-7xl">
-                {pack_list.map((pack, index) =>
-                    <Link key={pack.pack_id}  to={`/class-purchase/${pack.pack_id}`}>
-                        <PackItem pack={pack} />
-                    </Link>)}
+        <Layout>
+            <div className="flex justify-center">
+                <div className="grid w-full lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 p-3 max-w-7xl">
+                    {pack_list.map((pack, index) =>
+                        <Link key={pack.pack_id} to={`/class-purchase/${pack.pack_id}`}>
+                            <PackItem pack={pack} />
+                        </Link>)}
+                </div>
             </div>
-        </div>
+        </Layout>
 
     );
 }

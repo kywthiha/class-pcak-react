@@ -6,7 +6,7 @@
 
   html,
   body {
-    @apply h-full font-sans;
+    @apply h-full font-sans bg-secondary;
   }
 
 

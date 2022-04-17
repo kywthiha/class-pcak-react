@@ -1,24 +1,21 @@
 import React from "react";
 import { formatPrice } from "../../helper";
+import PackItemIcon from "./PackItemIcon";
 
 export default function PackItem({ pack }) {
     return (
 
         <div className="rounded-lg shadow-lg overflow-hidden mb-4">
             <div className="px-6 py-8 bg-white dark:bg-gray-800 sm:p-10 sm:pb-6">
-                <div className="flex justify-center">
-                    <span className="inline-flex px-4 py-1 dark:text-white rounded-full text-sm leading-5 font-semibold tracking-wide uppercase">
+                <div className=" mb-5 mt-5 text-center">
+                    <span className="inline-flex dark:text-white rounded-full text-2xl leading-5 font-semibold tracking-wide">
                         {pack.pack_name}
                     </span>
                 </div>
                 <div className="flex justify-center">
-                    <span className="inline-flex w-16 h-16 justify-center items-center  rounded-full text-xl border-2 overflow-hidden border-red-500 leading-5 font-semibold tracking-wide uppercase">
-                        <span className="inline-flex w-14 h-14 justify-center items-center bg-blue-300 rounded-full text-xl border-1 overflow-hidden  leading-5 font-semibold tracking-wide uppercase">
-                            {pack.total_credit}
-                        </span>
-                    </span>
+                    <PackItemIcon pack={pack} />
                 </div>
-                <div className="mt-4 text-center">
+                <div className="mt-4 text-center line-clamp-3">
                     {pack.pack_description}
                 </div>
                 <div className="mt-4 text-center text-2xl leading-none font-extrabold ">
