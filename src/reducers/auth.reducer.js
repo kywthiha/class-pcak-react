@@ -11,7 +11,7 @@ export default (state = {}, action) => {
     case LOGIN:
       return {
         ...state,
-        inProgress: false,
+        inProgress: action.payload.inProgress || false,
         errors: action.payload.errors || null
       };
     default:
