@@ -13,14 +13,28 @@ export function handleError(error) {
 
 export function numberFormat(number) {
     if (number) {
-        return Number(number).toLocaleString("en-US", {});
+        return Number(number).toLocaleString("en-US", {
+            style: 'currency',
+            currency: 'USD',
+        });
+    }
+    return number;
+}
+
+export function formatPrice(number) {
+    if (number) {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        });
+        return formatter.format(number); 
     }
     return number;
 }
 
 
 export function setToken(token) {
-    window.localStorage.setItem('token',token);
+    window.localStorage.setItem('token', token);
     return token;
 }
 

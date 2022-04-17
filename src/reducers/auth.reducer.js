@@ -1,12 +1,8 @@
 import {
-  LOGIN,
-  REGISTER,
-  LOGIN_PAGE_UNLOADED,
-  REGISTER_PAGE_UNLOADED,
-
+  LOGIN
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+export default function AuthReducer(state = {}, action) {
   switch (action.type) {
     case LOGIN:
       return {
@@ -17,5 +13,4 @@ export default (state = {}, action) => {
     default:
       return state;
   }
-  return state;
 };
