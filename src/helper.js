@@ -1,6 +1,6 @@
 export function handleError(error) {
     console.log(error);
-    if (error.response.data) {
+    if (error && error.response && error.response.data) {
         if (error.response.data.errors) {
             return error.response.data.errors;
         }
@@ -22,14 +22,11 @@ export function numberFormat(number) {
 }
 
 export function formatPrice(number) {
-    if (number) {
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        });
-        return formatter.format(number); 
-    }
-    return number;
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+    return formatter.format(Number(number || 0));
 }
 
 

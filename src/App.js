@@ -11,6 +11,8 @@ import PackList from "./pages/PackList";
 import ProtectedRoute from "./protected.route";
 import { getToken } from "./helper";
 import { useEffect, useState } from "react";
+import ClassPackPurchase from "./pages/ClassPackPurchase";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/" element={<PackList />} />
+          <Route path="/class-purchase/:packId" element={<ClassPackPurchase />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Page404 />} />
