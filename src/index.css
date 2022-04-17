@@ -5,8 +5,9 @@
 @layer components {
 
   html,
-  body {
-    @apply h-full font-sans bg-secondary;
+  body,
+  #root {
+    @apply h-full bg-secondary;
   }
 
 

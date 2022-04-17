@@ -13,6 +13,7 @@ import { getToken } from "./helper";
 import { useEffect, useState } from "react";
 import ClassPackPurchase from "./pages/ClassPackPurchase";
 import OrderSuccess from "./pages/OrderSuccess";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<PackList />} />
           <Route path="/class-purchase/:packId" element={<ClassPackPurchase />} />
           <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Page404 />} />

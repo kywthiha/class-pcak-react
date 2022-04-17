@@ -34,21 +34,21 @@ export default function Login() {
                 <h1 className="text-2xl text-center mb-4">Member Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <ValidationErrors errors={errors} />
-                    <div className="relative z-0 mb-6 w-full group my-2">
-                        <input type="email" autoComplete="off" name="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "   {...register("email")} />
-                        <label htmlFor="email" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" autoComplete="username" name="email" className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"   {...register("email")} />
                     </div>
-                    <div className="relative z-0 mb-6 w-full group my-2">
-                        <input type="password" autoComplete="new-password" name="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "     {...register("password")}
+                    <div >
+                        <label htmlFor="password">Password</label>
+                        <input type="password" autoComplete="new-password" className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"    {...register("password")}
                         />
-                        <label htmlFor="password" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
                     </div>
 
                     <div className="flex justify-center">
                         <button
                             type="submit"
                             disabled={inProgress}
-                            className={`inline-flex mt-4 items-center px-4 py-3 bg-cyan-700 border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest active:bg-cyan-900 transition ease-in-out duration-150 ${inProgress ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`inline-flex mt-4 items-center px-4 py-3 bg-primary border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest active:bg-cyan-900 transition ease-in-out duration-150 ${inProgress ? "opacity-50 cursor-not-allowed" : ""}`}
 
                         >
                             {inProgress && <svg role="status" class="inline mr-3 w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,8 +60,8 @@ export default function Login() {
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
 
     );
 }

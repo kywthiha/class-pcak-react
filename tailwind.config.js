@@ -10,7 +10,10 @@ module.exports = {
         "pack-single-color": "#99BEC4",
         "pack-share-color": "#29455D",
         "pack-nonshare-color": "#649299",
-      }
+      },
+      fontFamily: {
+        'pt-sans-narrow': ['PT Sans Narrow', 'sans-serif']
+      },
     },
   },
   plugins: [
