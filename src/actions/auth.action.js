@@ -1,5 +1,5 @@
 import axiosInstance from "../axiosInstance";
-import { LOGIN, LOGOUT } from "../constants/actionTypes";
+import { FETCH_PROFILE, LOGIN, LOGOUT } from "../constants/actionTypes";
 import { clearToken, handleError, setToken } from "../helper";
 
 export function login(email, password) {
@@ -11,6 +11,19 @@ export function login(email, password) {
             dispatch({ type: LOGIN, payload: { inProgress: false, user: response.data.data } });
         } catch (e) {
             dispatch({ type: LOGIN, payload: { errors: handleError(e) } });
+            throw new Error(e)
+        }
+    }
+}
+
+export function fetchUser() {
+    return async dispatch => {
+        try {
+            dispatch({ type: FETCH_PROFILE, payload: { inProgress: true } });
+            const response = await axiosInstance.get('/api/auth/profile')
+            dispatch({ type: FETCH_PROFILE, payload: { inProgress: false, user: response.data.data } });
+        } catch (e) {
+            dispatch({ type: FETCH_PROFILE, payload: { errors: handleError(e) } });
             throw new Error(e)
         }
     }

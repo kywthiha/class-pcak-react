@@ -1,31 +1,18 @@
-
-
-import {
-  Routes,
-  Route,
-  useSearchParams,
-} from "react-router-dom";
+import { Routes, Route, useSearchParams } from "react-router-dom";
 import Login from "./pages/Login";
 import Page404 from "./pages/404";
-import PackList from "./pages/PackList";
 import ProtectedRoute from "./protected.route";
 import { getToken } from "./helper";
 import { useEffect, useState } from "react";
-import ClassPackPurchase from "./pages/ClassPackPurchase";
-import OrderSuccess from "./pages/OrderSuccess";
-import AboutUs from "./pages/AboutUs";
+import TimeScheduleConfigurationIndex from "./pages/TimeScheduleConfiguration";
+
 
 function App() {
-
-
   return (
-    <div className='h-full'>
+    <div className="h-full">
       <Routes>
         <Route path="/" element={<ProtectedRoute />}>
-          <Route path="/" element={<PackList />} />
-          <Route path="/class-purchase/:packId" element={<ClassPackPurchase />} />
-          <Route path="/order-success" element={<OrderSuccess />} />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/" element={<TimeScheduleConfigurationIndex />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Page404 />} />
