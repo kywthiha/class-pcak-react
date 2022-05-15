@@ -5,6 +5,9 @@ import ProtectedRoute from "./protected.route";
 import { getToken } from "./helper";
 import { useEffect, useState } from "react";
 import TimeScheduleConfigurationIndex from "./pages/TimeScheduleConfiguration";
+import TimeScheduleIndex from "./pages/TimeSchedule";
+import BusScheduleIndex from "./pages/BusSchedule";
+import ShowMovieIndex from "./pages/ShowMovie";
 
 
 function App() {
@@ -13,6 +16,9 @@ function App() {
       <Routes>
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/" element={<TimeScheduleConfigurationIndex />} />
+          <Route path="/time-schedule" element={<TimeScheduleIndex />} />
+          <Route path="/bus-schedule" element={<BusScheduleIndex />} />
+          <Route path="/show-movie" element={<ShowMovieIndex />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Page404 />} />

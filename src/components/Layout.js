@@ -31,13 +31,22 @@ export default function Layout({ children }) {
 
   const navigation = [
     {
+      isEnable: true,
       name: "Home",
       href: "/",
     },
     {
       isEnable: user && user.time_schedule_confirguations_count > 0,
       name: "Time Schedule",
-      href: "/about-us",
+      href: "/time-schedule",
+    },
+    {
+      isEnable:
+        user &&
+        user.time_schedule_confirguations_count > 0 &&
+        user.time_schedules_count > 0,
+      name: "Bus Schedule",
+      href: "/bus-schedule",
     },
     {
       isEnable:
@@ -45,16 +54,8 @@ export default function Layout({ children }) {
         user.time_schedule_confirguations_count > 0 &&
         user.time_schedules_count > 0 &&
         user.bus_schedules_count > 0,
-      name: "Bus Schedule",
-      href: "/about-us",
-    },
-    {
-      isEnable:
-        user &&
-        user.time_schedule_confirguations_count > 0 &&
-        user.time_schedules_count > 0,
       name: "Show Movie Time",
-      href: "/about-us",
+      href: "/show-movie",
     },
   ];
 

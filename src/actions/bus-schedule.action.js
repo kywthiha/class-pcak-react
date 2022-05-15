@@ -1,29 +1,24 @@
 import axiosInstance from "../axiosInstance";
-import {
-  FETCH_PACK_LIST,
-  FETCH_TIME_SCHEDULE_CONFIGURATION,
-  STORE_TIME_SCHEDULE_CONFIGURATION,
-} from "../constants/actionTypes";
+import { FEATCH_BUS_SCHEDULE, STORE_BUS_SCHEDULE } from "../constants/actionTypes";
+
 
 import { handleError } from "../helper";
 
-export function fetchTimeScheudleConfiguration() {
+export function fetchBusScheudle() {
   return async (dispatch) => {
     try {
       dispatch({
-        type: FETCH_TIME_SCHEDULE_CONFIGURATION,
+        type: FEATCH_BUS_SCHEDULE,
         payload: { inProgress: true },
       });
-      const response = await axiosInstance.get(
-        `/api/time-schedule-configuration`
-      );
+      const response = await axiosInstance.get(`/api/bus-schedule`);
       dispatch({
-        type: FETCH_TIME_SCHEDULE_CONFIGURATION,
+        type: FEATCH_BUS_SCHEDULE,
         payload: { data: response.data.data },
       });
     } catch (e) {
       dispatch({
-        type: FETCH_TIME_SCHEDULE_CONFIGURATION,
+        type: FEATCH_BUS_SCHEDULE,
         payload: { errors: handleError(e) },
       });
       throw new Error(e);
@@ -31,26 +26,24 @@ export function fetchTimeScheudleConfiguration() {
   };
 }
 
-export function storeTimeScheudleConfiguration({
-  time_schedule_configuration,
-}) {
+export function storeBusScheudle({ bus_schedule }) {
   return async (dispatch) => {
     try {
       dispatch({
-        type: STORE_TIME_SCHEDULE_CONFIGURATION,
+        type: STORE_BUS_SCHEDULE,
         payload: { inProgress: true },
       });
       const response = await axiosInstance.post(
-        `/api/time-schedule-configuration`,
-        time_schedule_configuration
+        `/api/bus-schedule`,
+        bus_schedule
       );
       dispatch({
-        type: STORE_TIME_SCHEDULE_CONFIGURATION,
+        type: STORE_BUS_SCHEDULE,
         payload: { data: response.data.data },
       });
     } catch (e) {
       dispatch({
-        type: STORE_TIME_SCHEDULE_CONFIGURATION,
+        type: STORE_BUS_SCHEDULE,
         payload: { errors: handleError(e) },
       });
       throw new Error(e);

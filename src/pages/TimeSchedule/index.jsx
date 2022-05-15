@@ -11,16 +11,16 @@ import TimePicker from "../../components/TimePicker";
 import { ErrorMessage } from "@hookform/error-message";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 import {
-  fetchTimeScheudleConfiguration,
-  storeTimeScheudleConfiguration,
-} from "../../actions/time-schedule-configuration.action";
+  fetchTimeScheudle,
+  storeTimeScheudle,
+} from "../../actions/time-schedule.action";
 import moment from "moment";
 
-export default function TimeScheduleConfigurationIndex() {
+export default function TimeScheduleIndex() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data, inProgress, errors } = useSelector(
-    (state) => state.timeScheuldeConfiguration
+    (state) => state.timeSchuele
   );
   const [searchParams] = useSearchParams();
   const {
@@ -30,33 +30,18 @@ export default function TimeScheduleConfigurationIndex() {
     setValue,
     control,
     formState: { errors: formErrors },
-  } = useForm({
-    defaultValues: {
-      movie_time: [{}],
-    },
-  });
+  } = useForm();
 
   useEffect(async () => {
     nprogress.start();
-    await fetchTimeScheudleConfiguration()(dispatch);
+    await fetchTimeScheudle()(dispatch);
     nprogress.done();
   }, []);
-
-  const { fields, append, prepend, remove, swap, move, insert, update } =
-    useFieldArray({
-      control, // control props comes from useForm (optional: if you are using FormContext)
-      name: "movie_time", // unique name for your Field Array
-    });
 
   const onSubmit = async (values) => {
     try {
       console.log(values);
-      await storeTimeScheudleConfiguration({
-        time_schedule_configuration: {
-          ...values,
-          movie_time: values.movie_time.map((time) => time.value),
-        },
-      })(dispatch);
+      await storeTimeScheudle({ time_schedule: values })(dispatch);
     } catch (e) {
       handleError(e);
     }
@@ -69,13 +54,11 @@ export default function TimeScheduleConfigurationIndex() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <ValidationErrors errors={errors} />
             <div className="flex gap-2 items-center">
-              <label htmlFor="walking_time__bus_stop">
-                Walking Time to bus stop
-              </label>
+              <label htmlFor="alarm_time">Set Alarm Time</label>
               <TimePicker
-                onChange={(value) => setValue("walking_time__bus_stop", value)}
+                onChange={(value) => setValue("alarm_time", value)}
                 registerProps={{
-                  ...register("walking_time__bus_stop", {
+                  ...register("alarm_time", {
                     required: "Please select one option",
                   }),
                 }}
@@ -86,16 +69,16 @@ export default function TimeScheduleConfigurationIndex() {
                 <p className="text-red-500 text-xs">{message}</p>
               )}
               errors={formErrors}
-              name="walking_time__bus"
+              name="alarm_time"
             />
             <div className="flex gap-2 items-center">
-              <label htmlFor="time_taken_bus_stop">
-                Time taken to Cinema from bus stop
+              <label htmlFor="time_to_teeth">
+                Time taken to brush teeth and take a bath
               </label>
               <TimePicker
-                onChange={(value) => setValue("time_taken_bus_stop", value)}
+                onChange={(value) => setValue("time_to_teeth", value)}
                 registerProps={{
-                  ...register("time_taken_bus_stop", {
+                  ...register("time_to_teeth", {
                     required: "Please select one option",
                   }),
                 }}
@@ -106,33 +89,26 @@ export default function TimeScheduleConfigurationIndex() {
                 <p className="text-red-500 text-xs">{message}</p>
               )}
               errors={formErrors}
-              name="time_taken_bus_stop"
+              name="time_to_teeth"
             />
-            <div className="flex gap-2">
-              <label htmlFor="movie_time" className="pt-3">
-                Movie time
-              </label>
-              <div className="flex flex-col gap-2">
-                {fields.map((field, index) => {
-                  return (
-                    <Fragment key={field.id}>
-                      <TimePicker
-                        value={field.value}
-                        onChange={(value) => update(index, { value })}
-                        registerProps={register(`movie_time.${index}.value`)}
-                      />
-                    </Fragment>
-                  );
-                })}
-                <button
-                  type="button"
-                  className="inline-flex mt-4 justify-center items-center px-4 py-3 bg-primary border border-transparent rounded font-semibold text-xs text-white uppercase tracking-widest active:bg-cyan-900 transition ease-in-out duration-150"
-                  onClick={() => append({})}
-                >
-                  <PlusCircleIcon className="w-5 h-5" />
-                </button>
-              </div>
+            <div className="flex gap-2 items-center">
+              <label htmlFor="breakfast_time">Time taken from breakfast</label>
+              <TimePicker
+                onChange={(value) => setValue("breakfast_time", value)}
+                registerProps={{
+                  ...register("breakfast_time", {
+                    required: "Please select one option",
+                  }),
+                }}
+              />
             </div>
+            <ErrorMessage
+              render={({ message }) => (
+                <p className="text-red-500 text-xs">{message}</p>
+              )}
+              errors={formErrors}
+              name="breakfast_time"
+            />
 
             <div className="flex justify-start">
               <button
@@ -164,24 +140,14 @@ export default function TimeScheduleConfigurationIndex() {
               </button>
             </div>
           </form>
-          {data && data.time_taken_bus_stop && (
+
+          {data && data.alarm_time && (
             <div>
+              <p> Alarm Time : {moment(data.alarm_time).format("hh:mm A")}</p>
               <p>
-                Walking Time to bus stop:
-                {data.walking_time__bus_stop}
+                Time taken to brush teeth and take a bath : {data.time_to_teeth}
               </p>
-              <p>
-                Time taken to Cinema from bus stop:
-                {data.time_taken_bus_stop}
-              </p>
-              <p>
-                Movie time :
-                {data &&
-                  data.movie_time &&
-                  data.movie_time
-                    .map((item) => moment(item).format("hh:mm A"))
-                    .join(",")}
-              </p>
+              <p>Time taken from breakfast : {data.breakfast_time}</p>
             </div>
           )}
         </div>
